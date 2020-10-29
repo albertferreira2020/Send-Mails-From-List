@@ -11,7 +11,7 @@ let report = ''
 const conn = new sql.Connection(dbconfig);
 const req = new sql.Request(conn);
     conn.connect().then(() => {
-    req.query(`select 'Albert' as names, 'albert@unimedgm.coop.br' as emails`).then((recordset) => {
+    req.query(`select 'Albert' as names, 'yourmailaccont@host.com' as emails`).then((recordset) => {
     
 
         return new Promise((resolve, reject) => {
@@ -30,7 +30,7 @@ const req = new sql.Request(conn);
     
                                  
                                 var email1 = {
-                                    from: 'sistemas@unimedgm.coop.br', // who send, important, necessary valid email
+                                    from: 'yourmailsending@host.com', // who send, important, necessary valid email
                                     to: recordset[i].emails, // who recept
                                     subject: recordset[i].names + ' another subject',  
                                     html: `
@@ -61,7 +61,7 @@ const req = new sql.Request(conn);
 
 
 
-                 }, 7000*i)
+                 }, 7000*i) //every 7 seconds
             })(i);
 
             }
@@ -77,15 +77,15 @@ const req = new sql.Request(conn);
         
 
     }).then((report) => { 
-    //console.log('Send Email Relatório: ' + report)
+    //console.log('Send Email Report: ' + report)
 
     datetime = new Date();
     datetime =  ('00' + datetime.getUTCDate()).slice(-2) + '/' + ('00' + (datetime.getUTCMonth() + 1)).slice(-2) + '/' +  datetime.getUTCFullYear() + ' ' + ('00' + datetime.getUTCHours()).slice(-2) + ':' + ('00' + datetime.getUTCMinutes()).slice(-2) + ':' + ('00' + datetime.getUTCSeconds()).slice(-2);   
 
 
     var email2 = {
-        from: 'sistemas@unimedgm.coop.br', //  who send, important, necessary valid email
-        to: 'albert@unimedgm.coop.br', //  who recept
+        from: 'yourmailsending@host.com', //  who send, important, necessary valid email
+        to: 'yourmailaccont@host.com', //  who recept
         subject: ' Report Send E-mails ' + datetime,  
         
         html: `
